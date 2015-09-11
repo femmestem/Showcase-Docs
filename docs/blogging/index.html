@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Blogging - SHOWCASE</title>
+  <meta name="author" content="Christine Feaster">
+
+  
+  <meta name="description" content="Blogging Showcase includes rake tasks to create posts preloaded with metadata. It also generates a global and a category-based feed for your posts ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/docs/blogging/">
+  <link href="/Showcase-Docs/favicon.png" rel="icon">
+  <link href="/Showcase-Docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="" rel="alternate" title="SHOWCASE" type="application/atom+xml">
+  <script src="/Showcase-Docs/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <!-- http://kenwheeler.github.io/slick/ -->
+  <script defer type="text/javascript" src="/Showcase-Docs/javascripts/libs/slick.min.js"></script>
+  
+  <script defer src="/Showcase-Docs/javascripts/application.js" type="text/javascript"></script>
+  <!--Fonts from Google Fonts directory at http://www.google.com/fonts -->
+<link href="http://fonts.googleapis.com/css?family=Oswald:regular,italic,bold,bolditalic|Open+Sans:regular,italic,bold,bolditalic|Quattrocento:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/Showcase-Docs/">SHOWCASE</a></h1>
+  
+    <h2>A portfolio+blog framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><a href="#main" class="offscreen">Skip to main content</a>
+
+<section class="nav-menu">
+  <h3 class="offscreen fa fa-navicon">MENU</h3>
+    <ul class="main-navigation">
+  <li><a href="/Showcase-Docs/docs">Documentation</a></li>
+  <li><a href="https://github.com/femmestem/Showcase">Source</a></li>
+</ul>
+
+
+  <ul class="subscription" data-subscription="rss">
+    
+    
+    
+  </ul>
+
+  
+  <form action="https://www.google.com/search" method="get">
+    <fieldset role="search">
+    <label class="fa fa-search" for="search-box"><span class="offscreen">Search</span></label>
+      <input type="hidden" name="q" value="site:showcaserb.org/Showcase-Docs" />
+      <input id="search-box" class="search" type="text" name="q" results="0" placeholder="Search title or keyword"/>
+    </fieldset>
+  </form>
+  
+
+</section>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Blogging</h1>
+    
+  </header>
+  
+  <p>Showcase includes rake tasks to create posts preloaded with metadata. It also generates a global and a category-based feed for your posts (which you can find in <code>atom.xml</code> and <code>blog/categories/&lt;category&gt;/atom.xml</code>).</p>
+
+<p><strong>Note:</strong> If you are using zsh in the command line, then add <code>alias rake=noglob rake</code> to your zsh config to prevent the <code>zsh: no matches found</code> error that occurs when running these rake tasks.</p>
+
+<p>Some command line interpreters, e.g. zsh, have a special meaning for <code>[</code> and <code>]</code>. For rake tasks with options <code>$ rake task_name[option]</code>, you have to escape the brackets or temporarily switch to bash.</p>
+
+<p>Go to:<br />
+<a href="#anatomy-of-posts">Anatomy of Posts</a><br />
+<a href="#draft-posts">Draft Posts</a><br />
+<a href="#published-posts">Published Posts</a><br />
+<a href="#publish-and-unpublish-posts">Publish and Unpublish Posts</a><br />
+<a href="#generate-and-preview-site">Generate and Preview Site</a></p>
+
+<h2 id="anatomy-of-posts">Anatomy of Posts</h2>
+
+<p>Each post must include YAML front matter at the top (the content between two fences <code>---</code>) which tells Jekyll how to process files. Attributes in the front matter can be accessed dynamically within the content area using Liquid templating language, e.g. <code>{% page.attributeName %}</code>.</p>
+
+<p>Below the front matter is the content area. Anything in the content area will appear on the page. By default, posts and pages are markdown files, which accept any combination of markdown syntax, plain text (interpreted as Markdown), HTML, and Liquid templating syntax.</p>
+
+<p>To prevent a block of text from being parsed by the markdown preprocessor so that it appears as-is, enclose it between <code>{% raw %}</code> and <code>{% endraw %}</code> tags.</p>
+
+<p>To keep comment text hidden from the rendered page, include it between <code>{% comment %}</code> and <code>{% endcomment %}</code> tags.</p>
+
+<p><strong>Example</strong></p>
+
+<p>See rendered page here: <a href="blogging/anatomy-of-posts/" target="_new">“Anatomy of Posts” example</a></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>source/_posts/anatomy-of-posts.markdown </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>---
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>layout: post
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>date: 2015-08-01 08:10:07 -0700
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>title: &quot;Anatomy of Posts&quot;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>comments: true
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>sharing: false
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>categories: [demo, markdown, embedded code]
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>---
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>&lt;h2&gt; Anything Written Here Is Page Content &lt;/h2&gt;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>{% comment %}This text won't be rendered when you build the site.{% endcomment %}
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>&lt;strong&gt;This&lt;/strong&gt; will render the same as **that**.
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>### You Can Render the Page's YAML Front Matter with Liquid
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>Page Title: {{ page.title }}    
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>Categories: 
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>{% for category in page.categories %}&quot;{{ category }}&quot; {% endfor %}
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>### You Can Embed Code Snippets
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>    ```
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>    def sayhello
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>        puts &quot;Hello World!&quot;
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>    end
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>    ```
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>...with syntax highlighting
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>    ```ruby
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>    def sayhello
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>        puts &quot;Hello World!&quot;
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>    end
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>    ```
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>...and downloadable code snippets:
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span>{% codeblock helloworld.rb http://mysite.com/helloworld.rb Download %}
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span>    def sayhello
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>        puts &quot;Hello World!&quot;
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span>    end
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>{% endcodeblock %}</pre></div>
+</div>
+ </figure></notextile></div>
+
+<h2 id="draft-posts">Draft Posts</h2>
+<p>Draft posts are stored in the <code>source/_drafts</code> directory, which allows you to work on blog posts without including them in the site build. Draft posts will also be hidden by default when you preview the site locally with the <code>preview</code> command. To preview the site with both published posts and drafts you must use <code>preview[drafts]</code>.</p>
+
+<h3 id="new-draft">New Draft</h3>
+<p>Showcase provides a rake task to create new drafts with the right naming convention.</p>
+
+<p><strong>Syntax</strong></p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake new_draft[&quot;Post Title&quot;]
+</pre></div>
+</div>
+</div>
+
+<p>The <code>new_draft</code> command expects a naturally written title and will create a url-friendly filename stripped of invalid characters. The default extension for new draft posts is <code>markdown</code> though it can be configured in the <code>Rakefile</code>.</p>
+
+<p><strong>Example</strong></p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake new_draft[&quot;Learn Command Line the Hard Way&quot;]
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span># creates /source/_drafts/learn-command-line-the-hard-way.markdown
+</pre></div>
+</div>
+</div>
+
+<p>A freshly generated page will look like this:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>source/_drafts/learn-command-line-the-hard-way.markdown </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>---
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>layout: post
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>title: &quot;Learn Command Line the Hard Way&quot;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>comments: true
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>categories: []
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>---</pre></div>
+</div>
+ </figure></notextile></div>
+
+<h2 id="published-posts">Published Posts</h2>
+<p>To publish posts to your site, the post must be stored in the <code>source/_posts</code> directory and named according to Jekyll’s naming conventions: <code>YYYY-MM-DD-post-title.markdown</code>. The name of the file will be used as the url. The date helps with file distinction and determines the sorting order.</p>
+
+<p>Showcase provides a rake task to create new blog posts with the right naming convention.</p>
+
+<p><strong>Syntax</strong></p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake new_post[&quot;Post Title&quot;]
+</pre></div>
+</div>
+</div>
+
+<p>The <code>new_post</code> command expects a naturally written title and will create a url-friendly filename stripped of invalid characters and prepended with a datestamp. The default extension for new posts is <code>markdown</code> though it can be configured in the <code>Rakefile</code>.</p>
+
+<p><strong>Example</strong></p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake new_post[&quot;Learn Command Line the Hard Way&quot;]
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span># creates /source/_posts/learn-command-line-the-hard-way.markdown
+</pre></div>
+</div>
+</div>
+
+<p>A freshly generated page will look like this:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>source/_posts/learn-command-line-the-hard-way.markdown </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>---
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>layout: post
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>date: 2015-08-01 08:30:12 -0700
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>title: &quot;Learn Command Line the Hard Way&quot;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>comments: true
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>categories: []
+<span class="line-numbers"><a href="#n7" name="n7">7</a></span>---</pre></div>
+</div>
+ </figure></notextile></div>
+
+<h2 id="publish-and-unpublish-posts">Publish and Unpublish Posts</h2>
+
+<h3 id="publish-draft">Publish Draft</h3>
+
+<p>Drafts can be converted to posts, which will be included in the site build when you deploy to the live site, using the <code>publish</code> command. This moves the post from <code>source/_drafts</code> to <code>source/_posts</code> and adds a datestamp to the filename and yaml front matter.</p>
+
+<p><strong>Syntax</strong></p>
+
+<p>Example 1</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake publish[&quot;post-title.markdown&quot;]
+</pre></div>
+</div>
+</div>
+
+<p>Example 2</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake publish
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>&gt;&gt; Drafts waiting to be published:
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>&gt;&gt; 1 ) post-title.markdown
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>&gt;&gt; 2 ) other-post-title.markdown
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>&gt;&gt; Enter menu number(s) of file(s) to update: _
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span># You can enter multiple items to be unpublished
+</pre></div>
+</div>
+</div>
+
+<h3 id="revert-post-to-draft">Revert Post to Draft</h3>
+
+<p>Posts that have been published can be reverted to draft mode using the <code>unpublish</code> command. This moves the post from <code>source/_posts</code> to <code>source/_drafts</code> and strips the post of its datestamp in the filename and yaml front matter.</p>
+
+<p><strong>Syntax</strong></p>
+
+<p>Example 1</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake unpublish[&quot;2015-08-01-post-title.markdown&quot;]
+</pre></div>
+</div>
+</div>
+
+<p>Example 2</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake unpublish
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>&gt;&gt; Published posts:
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>&gt;&gt; 1 ) 2015-08-01-post-title.markdown
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>&gt;&gt; 2 ) 2015-08-05-other-post-title.markdown
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>&gt;&gt; Enter menu number(s) of file(s) to update: _
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span># You can enter multiple items to be unpublished
+</pre></div>
+</div>
+</div>
+
+<h2 id="generate-and-preview-site">Generate and Preview Site</h2>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake generate    # Generates posts and pages into the public directory
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ rake watch       # Watches source/ and sass/ for changes and regenerates site
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>$ rake preview     # Mounts a webserver at http://localhost:4000 and watches for changes
+</pre></div>
+</div>
+</div>
+
+<p>The <code>preview</code> command allows you to preview your site locally as it will appear online (that is, without drafts). You can also pass the <code>drafts</code> option to preview the site with draft posts (though they will stil be excluded when generating the actual site).</p>
+
+<p><strong>Show Published Posts Only</strong></p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake preview
+</pre></div>
+</div>
+</div>
+
+<p><strong>Show Posts and Drafts</strong></p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake preview[drafts]
+</pre></div>
+</div>
+</div>
+
+
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Christine Feaster -
+  <span class="credit">Powered by <a href="https://github.com/femmestem/showcase">Showcase</a></span> / <a href="http://octopress.org">Octopress 2.0</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

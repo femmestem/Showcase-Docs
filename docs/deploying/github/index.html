@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deploying With GitHub - SHOWCASE</title>
+  <meta name="author" content="Christine Feaster">
+
+  
+  <meta name="description" content="Deploying With GitHub Deploy Using GitHub User Pages
+Deploy Using Github Project Pages
+Custom Domains Using GitHub User/Organization pages Use this &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/docs/deploying/github/">
+  <link href="/Showcase-Docs/favicon.png" rel="icon">
+  <link href="/Showcase-Docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="" rel="alternate" title="SHOWCASE" type="application/atom+xml">
+  <script src="/Showcase-Docs/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <!-- http://kenwheeler.github.io/slick/ -->
+  <script defer type="text/javascript" src="/Showcase-Docs/javascripts/libs/slick.min.js"></script>
+  
+  <script defer src="/Showcase-Docs/javascripts/application.js" type="text/javascript"></script>
+  <!--Fonts from Google Fonts directory at http://www.google.com/fonts -->
+<link href="http://fonts.googleapis.com/css?family=Oswald:regular,italic,bold,bolditalic|Open+Sans:regular,italic,bold,bolditalic|Quattrocento:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/Showcase-Docs/">SHOWCASE</a></h1>
+  
+    <h2>A portfolio+blog framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><a href="#main" class="offscreen">Skip to main content</a>
+
+<section class="nav-menu">
+  <h3 class="offscreen fa fa-navicon">MENU</h3>
+    <ul class="main-navigation">
+  <li><a href="/Showcase-Docs/docs">Documentation</a></li>
+  <li><a href="https://github.com/femmestem/Showcase">Source</a></li>
+</ul>
+
+
+  <ul class="subscription" data-subscription="rss">
+    
+    
+    
+  </ul>
+
+  
+  <form action="https://www.google.com/search" method="get">
+    <fieldset role="search">
+    <label class="fa fa-search" for="search-box"><span class="offscreen">Search</span></label>
+      <input type="hidden" name="q" value="site:showcaserb.org/Showcase-Docs" />
+      <input id="search-box" class="search" type="text" name="q" results="0" placeholder="Search title or keyword"/>
+    </fieldset>
+  </form>
+  
+
+</section>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Deploying With GitHub</h1>
+    
+  </header>
+  
+  <p><a href="#github-user-pages">Deploy Using GitHub User Pages</a><br />
+<a href="#github-project-pages">Deploy Using Github Project Pages</a><br />
+<a href="#custom-domains">Custom Domains</a></p>
+
+<h2 id="github-user-pages">Using GitHub User/Organization pages</h2>
+
+<p>Use this if you want to host a site from <code>http://username.github.io</code> (though you can also use custom domains).</p>
+
+<p>Create a new GitHub repository and name the repository with the format <code>username.github.io</code>, where <code>username</code> is your GitHub user name or organization name.</p>
+
+<p>GitHub Pages for users and organizations uses the master branch like the public directory on a web server, serving up the files at your Pages URL <code>http://username.github.io</code>. As a result, you’ll want to work on the source for your site in the source branch and commit the <em>generated content</em> to the master branch. Showcase has a configuration task that helps you set all this up.</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake setup_github_pages
+</pre></div>
+</div>
+</div>
+
+<p>The rake task will prompt you for a URL of the GitHub repo. Copy the SSH or HTTPS URL from your newly created repository (e.g. <code>git@github.com:username/username.github.io.git</code>) and paste as the response.</p>
+
+<p>This will:</p>
+
+<ul>
+  <li>Ask for and store your GitHub Pages repository URL.</li>
+  <li>Rename the remote pointing to femmestem/showcase from ‘origin’ to ‘Showcase’</li>
+  <li>Add your GitHub Pages repository as the default origin remote.</li>
+  <li>Switch the active branch from <code>master</code> to <code>source</code>.</li>
+  <li>Configure your site’s URL according to your repository.</li>
+  <li>Setup a master branch in the <code>_deploy</code> directory for deployment.</li>
+</ul>
+
+<p>Then, run</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake generate
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ rake deploy
+</pre></div>
+</div>
+</div>
+
+<p>This will generate your site, copy the generated files into the <code>_deploy/</code> directory, add them to git, and commit and push them up to the master branch. In a few seconds you should get an email from GitHub telling you that your commit has been received and will be published on your site.</p>
+
+<p><strong>Don’t forget</strong> to commit the source for your site!</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ git add .
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ git commit -m 'your message'
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>$ git push origin source
+</pre></div>
+</div>
+</div>
+
+<p><strong>Note:</strong> With new repositories, GitHub sets the default branch based on the branch you push first, and it looks there for the generated site content. If you’re having trouble getting GitHub to publish your site, go to the admin panel for your repository and make sure that the master branch is the default branch.</p>
+
+<h2 id="github-project-pages">Using GitHub Project pages (gh-pages)</h2>
+
+<p>GitHub’s Project Pages service allows you to host a site for your existing open source project. GitHub will look for a <code>gh-pages</code> branch in your project’s repository and make the contents available at URL <code>http://username.github.io/project</code>.</p>
+
+<p>Here’s how to can set up your Showcase site to publish to your projects gh-pages repository:</p>
+
+<p><code>$ rake setup_github_pages</code></p>
+
+<p>This will:</p>
+
+<ul>
+  <li>Ask you for the repository URL for your project.</li>
+  <li>Rename the remote pointing to femmestem/showcase from ‘origin’ to ‘Showcase’</li>
+  <li>Configure your site for deploying to a subdirectory.</li>
+  <li>Set up a <code>gh-pages</code> branch for your project in the <code>_deploy/</code> directory, ready for deployment.</li>
+</ul>
+
+<p>Then, run</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake generate
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ rake deploy
+</pre></div>
+</div>
+</div>
+
+<p>This will generate your site, copy the generated files into the <code>_deploy/</code> directory, add them to git, and commit and push them up to the master branch. In a few seconds you should get an email from GitHub telling you that your commit has been received and will be published on your site.</p>
+
+<p>Now you have a place to commit the generated content for your site, but you should also set up repository to store the source for your site. After you set up a repository for your site source, add it as the origin remote.</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ git remote add origin &lt;your repo url&gt; # set your new origin as the default branch
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ git config branch.master.remote origin
+</pre></div>
+</div>
+</div>
+
+<p>Now simply push your changes to update your site.</p>
+
+<h2 id="custom-domains">Custom Domains</h2>
+
+<p>First you’ll need to create a file named <code>CNAME</code> in your site’s source:</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ echo 'your-domain.com' &gt;&gt; source/CNAME
+</pre></div>
+</div>
+</div>
+
+<p>OR</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ echo 'www.your-domain.com' &gt;&gt; source/CNAME
+</pre></div>
+</div>
+</div>
+
+<p>Next, you’ll need to visit your domain registrar or DNS host and add a record for your domain name.</p>
+
+<p>For a sub-domain like www.example.com you would simply create a CNAME record pointing at <code>cat-mandu.github.io</code>.
+If you are using a top-level domain like <code>example.com</code>, you must use an A record pointing to <code>192.30.252.153</code> or <code>192.30.252.154</code>.</p>
+
+<p><strong>Do not use a CNAME record with a top-level domain!</strong> It can have adverse side effects on other services, like email. Many DNS services will let you set a CNAME on a TLD, even though you shouldn’t.</p>
+
+<p>Also, remember that it may take up to a full day for DNS changes to propagate, so be patient.</p>
+
+<p><em>Source:</em> <a href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages guide</a></p>
+
+<p><br /><br />
+Credit: <a href="https://github.com/femmestem/">Christine Feaster</a>, <a href="https://github.com/imathis/">Brandon Mathis</a></p>
+
+<h2 id="next-steps">Next Steps</h2>
+<p><a href="/Showcase-Docs/docs/portfolios-and-projects">Creating &amp; Managing Portfolios</a><br />
+<a href="/Showcase-Docs/docs/blogging/">Blogging Basics</a></p>
+
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Christine Feaster -
+  <span class="credit">Powered by <a href="https://github.com/femmestem/showcase">Showcase</a></span> / <a href="http://octopress.org">Octopress 2.0</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

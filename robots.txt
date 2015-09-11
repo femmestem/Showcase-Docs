@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://showcaserb.org/Showcase-Docs/sitemap.xml 

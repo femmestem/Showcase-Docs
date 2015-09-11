@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deploying With Amazon AWS S3 - SHOWCASE</title>
+  <meta name="author" content="Christine Feaster">
+
+  
+  <meta name="description" content="Deploying With Amazon AWS S3 Set Up Amazon AWS S3
+Amazon hosts static sites directly through the S3 ‘buckets’ they provide. Create a bucket named &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/docs/deploying/aws-s3/">
+  <link href="/Showcase-Docs/favicon.png" rel="icon">
+  <link href="/Showcase-Docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="" rel="alternate" title="SHOWCASE" type="application/atom+xml">
+  <script src="/Showcase-Docs/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <!-- http://kenwheeler.github.io/slick/ -->
+  <script defer type="text/javascript" src="/Showcase-Docs/javascripts/libs/slick.min.js"></script>
+  
+  <script defer src="/Showcase-Docs/javascripts/application.js" type="text/javascript"></script>
+  <!--Fonts from Google Fonts directory at http://www.google.com/fonts -->
+<link href="http://fonts.googleapis.com/css?family=Oswald:regular,italic,bold,bolditalic|Open+Sans:regular,italic,bold,bolditalic|Quattrocento:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/Showcase-Docs/">SHOWCASE</a></h1>
+  
+    <h2>A portfolio+blog framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><a href="#main" class="offscreen">Skip to main content</a>
+
+<section class="nav-menu">
+  <h3 class="offscreen fa fa-navicon">MENU</h3>
+    <ul class="main-navigation">
+  <li><a href="/Showcase-Docs/docs">Documentation</a></li>
+  <li><a href="https://github.com/femmestem/Showcase">Source</a></li>
+</ul>
+
+
+  <ul class="subscription" data-subscription="rss">
+    
+    
+    
+  </ul>
+
+  
+  <form action="https://www.google.com/search" method="get">
+    <fieldset role="search">
+    <label class="fa fa-search" for="search-box"><span class="offscreen">Search</span></label>
+      <input type="hidden" name="q" value="site:showcaserb.org/Showcase-Docs" />
+      <input id="search-box" class="search" type="text" name="q" results="0" placeholder="Search title or keyword"/>
+    </fieldset>
+  </form>
+  
+
+</section>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Deploying With Amazon AWS S3</h1>
+    
+  </header>
+  
+  <h2 id="set-up-amazon-aws-s3">Set Up Amazon AWS S3</h2>
+<p>Amazon hosts static sites directly through the S3 ‘buckets’ they provide. Create a bucket named the same as your website’s domain name, formatted as <strong>www.yourdomain.com</strong>. If you don’t include <code>www</code> in your S3 bucket name, then anyone who goes to your website with a <code>www</code> prefix will get a <code>404 Page Not found</code> error when trying to visit your site. (We will set up <code>yourdomain.com</code> to redirect visitors to <code>www.yourdomain.com</code> in a later step.)</p>
+
+<p>After creating a bucket, go to <code>Properties</code>, expand the <code>Static Website Hosting</code> dropdown menu and select <code>Enable website hosting</code>. Set the <code>Index Document:</code> to “index.html”.</p>
+
+<p><img src="/Showcase-Docs/images/docs/aws-bucket-properties.png" alt="Amazon AWS S3 bucket properties" /></p>
+
+<h2 id="set-up-deployment-in-showcase">Set Up Deployment in Showcase</h2>
+
+<p>This setup uses Amazon S3 Tools to upload generated site content to the bucket on Amazon AWS S3 (see Step 1). S3 Tools is a command line program that will allow you to push the site up to Amazon using a rake task.</p>
+
+<h3 id="mac-os-x">Mac OS X</h3>
+
+<h4 id="requirements">Requirements</h4>
+<ol>
+  <li><a href="http://aws.amazon.com/s3/" target="_new">Amazon AWS S3 account</a></li>
+  <li><a href="/Showcase-Docs/docs/deploying/aws-s3/mac-s3-tools">Amazon S3 Tools (s3cmd)</a> (free)</li>
+</ol>
+
+<h4 id="update-rakefile">Update Rakefile</h4>
+<p>In your <code>Rakefile</code>, look for the <code>deploy_default = "rsync"</code> variable and change it to <code>"s3"</code>. Add a variable for your s3 bucket as well.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Rakefile </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n16" name="n16">16</a></span>deploy_default = <span class="string"><span class="delimiter">&quot;</span><span class="content">s3</span><span class="delimiter">&quot;</span></span> <span class="comment"># change &quot;rsync&quot; to &quot;s3&quot;</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>s3_bucket = <span class="string"><span class="delimiter">&quot;</span><span class="content">www.yourdomain.com</span><span class="delimiter">&quot;</span></span> <span class="comment"># add this variable underneath deploy_default</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Add this task to the Deploying section of your <code>Rakefile</code>.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Rakefile </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><strong><a href="#n400" name="n400">400</a></strong></span><span class="comment">##############</span>
+<span class="line-numbers"><a href="#n401" name="n401">401</a></span><span class="comment"># Deploying  #</span>
+<span class="line-numbers"><a href="#n402" name="n402">402</a></span><span class="comment">##############</span>
+<span class="line-numbers"><a href="#n403" name="n403">403</a></span>
+<span class="line-numbers"><a href="#n404" name="n404">404</a></span>...
+<span class="line-numbers"><a href="#n405" name="n405">405</a></span>
+<span class="line-numbers"><a href="#n406" name="n406">406</a></span>desc <span class="string"><span class="delimiter">&quot;</span><span class="content">Deploy website via s3cmd</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n407" name="n407">407</a></span>task <span class="symbol">:s3</span> <span class="keyword">do</span>
+<span class="line-numbers"><a href="#n408" name="n408">408</a></span>  exclude = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n409" name="n409">409</a></span>  <span class="keyword">if</span> <span class="constant">File</span>.exists?(<span class="string"><span class="delimiter">'</span><span class="content">./s3-exclude</span><span class="delimiter">'</span></span>)
+<span class="line-numbers"><strong><a href="#n410" name="n410">410</a></strong></span>    exclude = <span class="string"><span class="delimiter">&quot;</span><span class="content">--exclude-from </span><span class="char">\'</span><span class="inline"><span class="inline-delimiter">#{</span><span class="constant">File</span>.expand_path(<span class="string"><span class="delimiter">'</span><span class="content">./s3-exclude</span><span class="delimiter">'</span></span>)<span class="inline-delimiter">}</span></span><span class="char">\'</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n411" name="n411">411</a></span>  <span class="keyword">end</span>
+<span class="line-numbers"><a href="#n412" name="n412">412</a></span>
+<span class="line-numbers"><a href="#n413" name="n413">413</a></span>  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">## Deploying website via s3cmd</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n414" name="n414">414</a></span>  ok_failed system(<span class="string"><span class="delimiter">&quot;</span><span class="content">s3cmd sync --acl-public --reduced-redundancy </span><span class="inline"><span class="inline-delimiter">#{</span>exclude<span class="inline-delimiter">}</span></span><span class="content"> --delete-removed </span><span class="inline"><span class="inline-delimiter">#{</span>public_dir<span class="inline-delimiter">}</span></span><span class="content">/* s3://</span><span class="inline"><span class="inline-delimiter">#{</span>s3_bucket<span class="inline-delimiter">}</span></span><span class="content">/</span><span class="delimiter">&quot;</span></span>)
+<span class="line-numbers"><a href="#n415" name="n415">415</a></span><span class="keyword">end</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h3 id="windows">Windows</h3>
+
+<h4 id="requirements-1">Requirements</h4>
+<ol>
+  <li><a href="http://aws.amazon.com/s3/" target="_new">Amazon AWS S3 account</a></li>
+  <li><a href="http://www.s3express.com/download.htm">S3Express</a> ($99)
+    <ul>
+      <li>If you have deployed Jekyll, Octopress or Showcase to Amazon S3 from a Windows machine using free tools, help out the community by shooting me an email.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="update-rakefile-1">Update Rakefile</h4>
+<p>In your <code>Rakefile</code>, look for the <code>deploy_default = "rsync"</code> variable and change it to <code>"s3"</code>. Add a variable for your s3 bucket as well.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Rakefile </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n16" name="n16">16</a></span>deploy_default = <span class="string"><span class="delimiter">&quot;</span><span class="content">s3</span><span class="delimiter">&quot;</span></span> <span class="comment"># change &quot;rsync&quot; to &quot;s3&quot;</span>
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>s3_bucket = <span class="string"><span class="delimiter">&quot;</span><span class="content">www.yourdomain.com</span><span class="delimiter">&quot;</span></span> <span class="comment"># add this variable underneath deploy_default</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>Add this task to the Deploying section of your <code>Rakefile</code>.<br />
+(<strong>Note:</strong> I am a Mac user. I wrote this rake task based on the S3Express documentation, but I have not tested on a Windows machine.)</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Rakefile </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><strong><a href="#n400" name="n400">400</a></strong></span><span class="comment">##############</span>
+<span class="line-numbers"><a href="#n401" name="n401">401</a></span><span class="comment"># Deploying  #</span>
+<span class="line-numbers"><a href="#n402" name="n402">402</a></span><span class="comment">##############</span>
+<span class="line-numbers"><a href="#n403" name="n403">403</a></span>
+<span class="line-numbers"><a href="#n404" name="n404">404</a></span>...
+<span class="line-numbers"><a href="#n405" name="n405">405</a></span>
+<span class="line-numbers"><a href="#n406" name="n406">406</a></span>desc <span class="string"><span class="delimiter">&quot;</span><span class="content">Deploy website via s3cmd</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n407" name="n407">407</a></span>task <span class="symbol">:s3</span> <span class="keyword">do</span>
+<span class="line-numbers"><a href="#n408" name="n408">408</a></span>  exclude = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n409" name="n409">409</a></span>  <span class="keyword">if</span> <span class="constant">File</span>.exists?(<span class="string"><span class="delimiter">'</span><span class="content">.</span><span class="content">\s</span><span class="content">3-exclude</span><span class="delimiter">'</span></span>)
+<span class="line-numbers"><strong><a href="#n410" name="n410">410</a></strong></span>    exclude = <span class="string"><span class="delimiter">&quot;</span><span class="content">-exclude:</span><span class="char">\'</span><span class="inline"><span class="inline-delimiter">#{</span><span class="constant">File</span>.expand_path(<span class="string"><span class="delimiter">'</span><span class="content">.</span><span class="content">\s</span><span class="content">3-exclude</span><span class="delimiter">'</span></span>)<span class="inline-delimiter">}</span></span><span class="char">\'</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n411" name="n411">411</a></span>  <span class="keyword">end</span>
+<span class="line-numbers"><a href="#n412" name="n412">412</a></span>
+<span class="line-numbers"><a href="#n413" name="n413">413</a></span>  puts <span class="string"><span class="delimiter">&quot;</span><span class="content">## Deploying website via s3cmd</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n414" name="n414">414</a></span>  ok_failed system(<span class="string"><span class="delimiter">&quot;</span><span class="content">s3express put </span><span class="inline"><span class="inline-delimiter">#{</span>exclude<span class="inline-delimiter">}</span></span><span class="content"> -cacl:public-read -rr -purge </span><span class="inline"><span class="inline-delimiter">#{</span>public_dir<span class="inline-delimiter">}</span></span><span class="char">\ </span><span class="content">s3://</span><span class="inline"><span class="inline-delimiter">#{</span>s3_bucket<span class="inline-delimiter">}</span></span><span class="content">/</span><span class="delimiter">&quot;</span></span>)
+<span class="line-numbers"><a href="#n415" name="n415">415</a></span><span class="keyword">end</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h3 id="deploy">Deploy!</h3>
+<p>You must have <a href="/Showcase-Docs/docs/deploying/aws-s3/mac-s3-tools">Amazon S3 Tools (Mac)</a> or <a href="http://www.s3express.com/download.htm">S3Express (Windows)</a> downloaded, installed, and configured for the rake task to work. If you have not already done so, set those up and then come back.</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ bundle exec rake generate
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ bundle exec rake deploy
+</pre></div>
+</div>
+</div>
+
+<p>Your files should now be pushed up to your Amazon S3 bucket and you should be able to view your site by visiting the <strong>endpoint</strong> (default URL) that was defined for your bucket, e.g. <code>bucketname.s3-website-us-east-1.amazonaws.com</code>. You can find your endpoint under bucket <code>Properties</code>.</p>
+
+<h2 id="use-custom-domain-with-amazon-aws-s3">Use Custom Domain with Amazon AWS S3</h2>
+<p>In this step, we will point your custom domain <code>www.yourdomain.com</code> to your site hosted on Amazon, so visitors can access your site through your domain instead of the Amazon endpoint.</p>
+
+<h3 id="step-1">Step 1</h3>
+<p>Using your Domain Name Service (DNS) provider’s tools, create a CNAME record to map <code>www.yourdomain.com</code> to your bucket’s <strong>endpoint</strong> (under bucket <code>Properties</code>, e.g. <code>bucketname.s3-website-us-east-1.amazonaws.com</code>). The CNAME will allow visitors to access your site at <code>www.yourdomain.com</code>.</p>
+
+<h3 id="step-2">Step 2</h3>
+<p>CNAMEs only work on subdomains like <code>www</code>, so visitors will still get an error if they visit your ‘naked domain’ <code>yourdomain.com</code>. An additional step is required to redirect <code>yourdomain.com</code> to <code>www.yourdomain.com</code>. Some DNS providers offer a forwarding service.</p>
+
+<p>If your DNS provider doesn’t, check out <a href="http://wwwizer.com/naked-domain-redirect">WWWizer</a> - it’s free and doesn’t require registration. To use WWWizer, create an <code>A</code> / <code>@</code> record that points <code>yourdomain.com</code> to <code>174.129.25.170</code>. That’s it!</p>
+
+<p><strong>Note:</strong> It can take anywhere from 3-72 hours for your domain to propogate (go live). <strong>Be patient!</strong></p>
+
+<h2 id="next-steps">Next Steps</h2>
+<p><a href="/Showcase-Docs/docs/portfolios-and-projects">Creating &amp; Managing Portfolios</a><br />
+<a href="/Showcase-Docs/docs/blogging/">Blogging Basics</a></p>
+
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Christine Feaster -
+  <span class="credit">Powered by <a href="https://github.com/femmestem/showcase">Showcase</a></span> / <a href="http://octopress.org">Octopress 2.0</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

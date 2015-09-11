@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Installing Amazon S3 Tools - SHOWCASE</title>
+  <meta name="author" content="Christine Feaster">
+
+  
+  <meta name="description" content="Installing Amazon S3 Tools Amazon S3 Tools is a free command line tool and client for Mac OS X that enables uploading, retrieving, and managing data &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/docs/deploying/aws-s3/mac-s3-tools/">
+  <link href="/Showcase-Docs/favicon.png" rel="icon">
+  <link href="/Showcase-Docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="" rel="alternate" title="SHOWCASE" type="application/atom+xml">
+  <script src="/Showcase-Docs/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <!-- http://kenwheeler.github.io/slick/ -->
+  <script defer type="text/javascript" src="/Showcase-Docs/javascripts/libs/slick.min.js"></script>
+  
+  <script defer src="/Showcase-Docs/javascripts/application.js" type="text/javascript"></script>
+  <!--Fonts from Google Fonts directory at http://www.google.com/fonts -->
+<link href="http://fonts.googleapis.com/css?family=Oswald:regular,italic,bold,bolditalic|Open+Sans:regular,italic,bold,bolditalic|Quattrocento:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/Showcase-Docs/">SHOWCASE</a></h1>
+  
+    <h2>A portfolio+blog framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><a href="#main" class="offscreen">Skip to main content</a>
+
+<section class="nav-menu">
+  <h3 class="offscreen fa fa-navicon">MENU</h3>
+    <ul class="main-navigation">
+  <li><a href="/Showcase-Docs/docs">Documentation</a></li>
+  <li><a href="https://github.com/femmestem/Showcase">Source</a></li>
+</ul>
+
+
+  <ul class="subscription" data-subscription="rss">
+    
+    
+    
+  </ul>
+
+  
+  <form action="https://www.google.com/search" method="get">
+    <fieldset role="search">
+    <label class="fa fa-search" for="search-box"><span class="offscreen">Search</span></label>
+      <input type="hidden" name="q" value="site:showcaserb.org/Showcase-Docs" />
+      <input id="search-box" class="search" type="text" name="q" results="0" placeholder="Search title or keyword"/>
+    </fieldset>
+  </form>
+  
+
+</section>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Installing Amazon S3 Tools</h1>
+    
+  </header>
+  
+  <p>Amazon S3 Tools is a free command line tool and client for Mac OS X that enables uploading, retrieving, and managing data in Amazon S3.</p>
+
+<h2 id="requirements">Requirements</h2>
+<ol>
+  <li>Mac OS X 10.6 and above</li>
+  <li><a href="https://gpgtools.org/gpgsuite.html" target="_new">GPG tools suite</a></li>
+  <li><a href="http://aws.amazon.com/s3/" target="_new">Amazon AWS S3 account</a></li>
+</ol>
+
+<h2 id="step-1">Step 1</h2>
+<p>You will need your Amazon AWS security credentials. First, log into your Amazon AWS account. Then, navigate to <a href="https://console.aws.amazon.com/iam/home#security_credential" target="_new">Security Credentials</a>.</p>
+
+<p><img src="/Showcase-Docs/images/docs/AWS_navmenu_securcred.png" alt="AWS Nav Menu - Security Credentials" /></p>
+
+<p>Expand the menu <code>Access Keys (Access Key ID and Secret Access Key)</code> and select <code>Create New Access Key</code></p>
+
+<p><img src="/Showcase-Docs/images/docs/AWS_securcred_page.png" alt="AWS Security Credentials Page" /></p>
+
+<p>Select <code>Download Key File</code> and save the downloaded file <code>rootkey.csv</code> someplace you can easily access for the next step.</p>
+
+<h2 id="step-2">Step 2</h2>
+<p>There are two ways to download and install Amazon S3 Tools (s3cmd): download from <a href="http://s3tools.org/download" target="_new">source</a> or via the <a href="brew.sh" target="_new">Homebrew</a> package manager.</p>
+
+<p>As far as I know, Homebrew’s installation of Amazon S3 Tools does not support the Amazon CloudFront cache invalidation option. If that’s important to you, download and install from source. If you don’t know what cache invalidation means, I recommend you use Homebrew package manager.</p>
+
+<h3 id="downloads">Downloads</h3>
+<p><strong>Source:</strong> <a href="http://s3tools.org/download" target="_new">s3cmd.org</a>  <br />
+- or - <br />
+<strong>Homebrew:</strong> <a href="brew.sh" target="_new">brew.sh</a><br />
+After install, run <code>$ brew install s3cmd</code></p>
+
+<h2 id="step-3">Step 3</h2>
+<p>Install <a href="https://gpgtools.org/gpgsuite.html" target="_new">GPG Tools Suite</a> if you haven’t already.</p>
+
+<p>Run <code>$ s3cmd --configure</code></p>
+
+<p>You will be prompted to enter five pieces of information:</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>Access Key:
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Secret Key:
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>Default Region:
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>Path to GPG program:
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>Default output format:
+</pre></div>
+</div>
+</div>
+
+<p><code>Access Key:</code> Enter the access key from the <code>rootkey.csv</code> file that you downloaded in Step 1.</p>
+
+<p><code>Secret Key:</code> Enter the secret key from the <code>rootkey.csv</code> file that you downloaded in Step 1.</p>
+
+<p><code>Default Region:</code> Choose the region closest to you from the list of <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-region.html">AWS Regions</a>.</p>
+
+<p><code>Path to GPG program:</code> Open a new terminal session and run <code>$ which gpg</code>. Copy the path that’s returned, then go back to the s3cmd configuration wizard and paste the path.</p>
+
+<p><code>Default output format:</code> Default output format can be either json, text, or table. If you don’t specify an output format, json will be used.</p>
+
+<p><strong>Example</strong></p>
+
+<p>The keys below are invalid and for demonstration purposes only.</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>$ s3cmd --configure
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>Enter new values or accept defaults in brackets with Enter.  
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>Refer to user manual for detailed description of all options.
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>Access key and Secret key are your identifiers for Amazon S3  
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>Access Key: AKIAI44QH8DHBEXAMPLE
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>Secret Key: je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>Default Region: us-east-1
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>Encryption password is used to protect your files from reading  
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>by unauthorized persons while in transfer to S3  
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>Encryption password: make-your-own-password  
+<span class="line-numbers"><a href="#n14" name="n14">14</a></span>Path to GPG program: /usr/local/bin/gpg
+<span class="line-numbers"><a href="#n15" name="n15">15</a></span>
+<span class="line-numbers"><a href="#n16" name="n16">16</a></span>When using secure HTTPS protocol all communication with Amazon S3  
+<span class="line-numbers"><a href="#n17" name="n17">17</a></span>servers is protected from 3rd party eavesdropping. This method is  
+<span class="line-numbers"><a href="#n18" name="n18">18</a></span>slower than plain HTTP and can't be used if you're behind a proxy  
+<span class="line-numbers"><a href="#n19" name="n19">19</a></span>Use HTTPS protocol [No]: yes
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span>New settings:  
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>  Access Key: AKIAI44QH8DHBEXAMPLE
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span>  Secret Key: je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span>  Encryption password: make-your-own-password
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span>  Path to GPG program: /usr/local/bin/gpg
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span>  Use HTTPS protocol: True
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span>  HTTP Proxy server name:
+<span class="line-numbers"><a href="#n28" name="n28">28</a></span>  HTTP Proxy server port: 0
+<span class="line-numbers"><a href="#n29" name="n29">29</a></span>
+<span class="line-numbers"><strong><a href="#n30" name="n30">30</a></strong></span>Test access with supplied credentials? [Y/n] y  
+<span class="line-numbers"><a href="#n31" name="n31">31</a></span>Please wait, attempting to list all buckets...  
+<span class="line-numbers"><a href="#n32" name="n32">32</a></span>Success. Your access key and secret key worked fine :-)
+<span class="line-numbers"><a href="#n33" name="n33">33</a></span>
+<span class="line-numbers"><a href="#n34" name="n34">34</a></span>Now verifying that encryption works...  
+<span class="line-numbers"><a href="#n35" name="n35">35</a></span>Success. Encryption and decryption worked fine :-)
+<span class="line-numbers"><a href="#n36" name="n36">36</a></span>
+<span class="line-numbers"><a href="#n37" name="n37">37</a></span>Save settings? [y/N] y  
+<span class="line-numbers"><a href="#n38" name="n38">38</a></span>Configuration saved to '/Users/your-account/.s3cfg'
+</pre></div>
+</div>
+</div>
+
+<p>If everything went well, you can continue setting up <a href="/Showcase-Docs/docs/deploying/aws-s3/">Deployment with Amazon AWS S3</a></p>
+
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Christine Feaster -
+  <span class="credit">Powered by <a href="https://github.com/femmestem/showcase">Showcase</a></span> / <a href="http://octopress.org">Octopress 2.0</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

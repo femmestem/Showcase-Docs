@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Welcome to Showcase - SHOWCASE</title>
+  <title>Setup - SHOWCASE</title>
   <meta name="author" content="Christine Feaster">
 
   
-  <meta name="description" content="Welcome to Showcase Showcase is a portfolio and blog framework built on Jekyll, the static blogging engine powering Github Pages. Showcase is &hellip;">
+  <meta name="description" content="Setup Next: Configuration » Requirements Git Ruby 1.9.3 or greater using either RVM or rbenv ExecJS supported JavaScript runtime To check your ruby &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/">
+  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/docs/setup/">
   <link href="/Showcase-Docs/favicon.png" rel="icon">
   <link href="/Showcase-Docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="" rel="alternate" title="SHOWCASE" type="application/atom+xml">
@@ -80,32 +80,72 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Welcome to Showcase</h1>
+    <h1 class="entry-title">Setup</h1>
     
   </header>
   
-  <p>Showcase is a portfolio and blog framework built on Jekyll, the static blogging engine powering Github Pages. Showcase is designed to make it fast and easy to set up a portfolio website. Create a webpage for each project with a single command. Include a slideshow image gallery on your project webpage by simply adding images to the project’s image folder. If you’re a coder, designer, and photographer, you’ll love how easy it is to create multiple portfolios.</p>
+  <p><a href="/Showcase-Docs/docs/configuring">Next: Configuration »</a></p>
 
-<p><strong>Note:</strong> Showcase is a <strong>portfolio+blog framework for coders</strong> who are comfortable with shell commands and basics of Git. If that sounds daunting, Showcase may not be for you.</p>
+<h2 id="requirements">Requirements</h2>
+<ol>
+  <li><a href="http://git-scm.com/">Git</a></li>
+  <li>Ruby 1.9.3 or greater using either <a href="/Showcase-Docs/docs/setup/rvm">RVM</a> or <a href="/Showcase-Docs/docs/setup/rbenv">rbenv</a></li>
+  <li><a href="https://github.com/sstephenson/execjs" target="_blank">ExecJS</a> supported JavaScript runtime</li>
+</ol>
 
-<h2 id="getting-started">Getting Started</h2>
+<p>To check your ruby version, run <code>$ ruby --version</code>.<br />
+If your version is at least Ruby 1.9.3, then you’re good to go. Otherwise, install or update your ruby version with <a href="/Showcase-Docs/docs/setup/rvm">RVM</a> or <a href="/Showcase-Docs/docs/setup/rbenv">rbenv</a>.</p>
 
-<p>This section will help you get set up, and explain how to configure Showcase for your site.</p>
+<h2 id="set-up-showcase">Set Up Showcase</h2>
 
-<p><strong>Note:</strong> If you want to migrate a blog that’s not built with Jekyll or Octopress, check out <a href="http://jekyllrb.com/docs/migrations/" target="_blank">Jekyll’s Migration page</a> to help you get your current blog set up for Showcase. If you’re already using Jekyll or Octopress, you can copy posts and pages directly into Showcase.</p>
+<p><a href="https://github.com/femmestem/Showcase/archive/master.zip">Download</a> or clone from Github</p>
 
-<p><a href="/Showcase-Docs/docs/setup/">Initial Setup</a> - download source files and install dependencies<br />
-<a href="/Showcase-Docs/docs/configuring/">Basic Configuration</a> - personalize your site and enable third party services</p>
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ git clone https://github.com/femmestem/Showcase.git showcase
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ cd showcase
+</pre></div>
+</div>
+</div>
 
-<h2 id="using-showcase">Using Showcase</h2>
-<p><a href="/Showcase-Docs/docs/portfolios-and-projects">Portfolios &amp; Projects</a> - how to create portfolios and add projects<br />
-<a href="/Showcase-Docs/docs/blogging">Blogging Basics</a> - how to create blog posts, save posts as drafts, and publish posts<br />
-<a href="/Showcase-Docs/docs/deploying">Deploying</a> - simple deploy instructions for GitHub Pages, Heroku, Rsync, and Amazon Web Services<br />
-<a href="/Showcase-Docs/docs/updating">Updating Showcase</a> - a guide to help you stay current with Showcase</p>
+<p>Install dependencies<br />
+<strong>Note:</strong> You will need to do this every time you update your version of Ruby.</p>
 
-<h2 id="popular-plugins-for-showcase">Popular Plugins for Showcase</h2>
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ gem install bundler
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ rbenv rehash # rehash rbenv to run bundle command, skip if using RVM
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>$ bundle install
+</pre></div>
+</div>
+</div>
 
-<p>Coming soon!</p>
+<p>Install the default Showcase theme</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake install
+</pre></div>
+</div>
+</div>
+
+<p>To verify the install was successful and preview your new site</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ rake preview
+</pre></div>
+</div>
+</div>
+
+<p>Open <code>localhost:4000</code> in an internet browser. You should see something like this:</p>
+
+<p><img src="/Showcase-Docs/images/docs/showcase_index.png" alt="Showcase Landing Page" /></p>
+
+<p><br /><br />
+Credit: <a href="https://github.com/femmestem/">Christine Feaster</a>, <a href="https://github.com/imathis/">Brandon Mathis</a></p>
+
+<h2 id="next-steps">Next Steps</h2>
+<p><a href="/Showcase-Docs/docs/configuring">Configuring</a><br />
+<a href="/Showcase-Docs/docs/portfolios-and-projects">Creating &amp; Managing Portfolios</a><br />
+<a href="/Showcase-Docs/docs/blogging/">Blogging Basics</a>  <br />
+<a href="/Showcase-Docs/docs/deploying">Deploying</a></p>
 
 
   

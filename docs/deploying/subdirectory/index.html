@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Subdirectory - SHOWCASE</title>
+  <meta name="author" content="Christine Feaster">
+
+  
+  <meta name="description" content="Subdirectory Showcase can be deployed as a standalone site or deployed to a subdirectory of another site. If you’re deploying to a subdirectory on &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/docs/deploying/subdirectory/">
+  <link href="/Showcase-Docs/favicon.png" rel="icon">
+  <link href="/Showcase-Docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="" rel="alternate" title="SHOWCASE" type="application/atom+xml">
+  <script src="/Showcase-Docs/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <!-- http://kenwheeler.github.io/slick/ -->
+  <script defer type="text/javascript" src="/Showcase-Docs/javascripts/libs/slick.min.js"></script>
+  
+  <script defer src="/Showcase-Docs/javascripts/application.js" type="text/javascript"></script>
+  <!--Fonts from Google Fonts directory at http://www.google.com/fonts -->
+<link href="http://fonts.googleapis.com/css?family=Oswald:regular,italic,bold,bolditalic|Open+Sans:regular,italic,bold,bolditalic|Quattrocento:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/Showcase-Docs/">SHOWCASE</a></h1>
+  
+    <h2>A portfolio+blog framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><a href="#main" class="offscreen">Skip to main content</a>
+
+<section class="nav-menu">
+  <h3 class="offscreen fa fa-navicon">MENU</h3>
+    <ul class="main-navigation">
+  <li><a href="/Showcase-Docs/docs">Documentation</a></li>
+  <li><a href="https://github.com/femmestem/Showcase">Source</a></li>
+</ul>
+
+
+  <ul class="subscription" data-subscription="rss">
+    
+    
+    
+  </ul>
+
+  
+  <form action="https://www.google.com/search" method="get">
+    <fieldset role="search">
+    <label class="fa fa-search" for="search-box"><span class="offscreen">Search</span></label>
+      <input type="hidden" name="q" value="site:showcaserb.org/Showcase-Docs" />
+      <input id="search-box" class="search" type="text" name="q" results="0" placeholder="Search title or keyword"/>
+    </fieldset>
+  </form>
+  
+
+</section>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Subdirectory</h1>
+    
+  </header>
+  
+  <p>Showcase can be deployed as a standalone site or deployed to a subdirectory of another site. If you’re deploying to a subdirectory on your site, or if you’re using Github’s project pages, make sure you set up your URLs correctly in your configs. You can do this <em>almost</em> automatically:</p>
+
+<p><code>$ rake set_root_dir[your/path]</code></p>
+
+<p>(To reset Showcase as your main site: <code>$ rake set_root_dir[/]</code>)</p>
+
+<p>Then, update your <code>_config.yml</code>:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span><span class="key">url</span>: <span class="string"><span class="content">http://www.your-site.com/your/path</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>If deploying with rsync, update your <code>Rakefile</code>:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Rakefile </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>document_root = <span class="string"><span class="delimiter">&quot;</span><span class="content">~/your-site.com/your/path</span><span class="delimiter">&quot;</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h2 id="manual-configuration">Manual Configuration</h2>
+
+<p>To manually configure deployment to a subdirectory, change <code>_config.yml</code>, <code>config.rb</code>, and <code>Rakefile</code>.</p>
+
+<h3 id="example">Example</h3>
+
+<p>Let’s say Cat Mandu has a professional reputation in different industries, as a software developer and a commercial photographer. She wants to deploy Showcase as a subdirectory with portfolio and blog dedicated to her software development career.</p>
+
+<p>Existing site: <code>http://www.cat-mandu.com</code>
+Subdirectory where Showcase will be deployed: <code>http://www.cat-mandu.com/software-developer</code></p>
+
+<p><strong>For Setting Up Relative Paths and URLs</strong></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="comment"># ----------------------- #</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">#      Main Configs       #</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"># ----------------------- #</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span><span class="key">url</span>: <span class="string"><span class="content">http://www.cat-mandu.com/software-developer</span></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="key">root</span>: <span class="string"><span class="content">/software-developer</span></span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="key">destination</span>: <span class="string"><span class="content">public/software-developer</span></span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="comment"># ------------------- #</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="comment">#    Blog Configs     #</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="comment"># ------------------- #</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span><span class="key">subscribe_rss</span>: <span class="string"><span class="content">/software-developer/blog/atom.xml</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><strong>For Compass and Sass</strong></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.rb </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>http_path        = <span class="string"><span class="delimiter">&quot;</span><span class="content">/software-developer</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>http_images_path = <span class="string"><span class="delimiter">&quot;</span><span class="content">/software-developer/images</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>http_fonts_path  = <span class="string"><span class="delimiter">&quot;</span><span class="content">/software-developer/fonts</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>css_dir          = <span class="string"><span class="delimiter">&quot;</span><span class="content">public/software-developer/stylesheets</span><span class="delimiter">&quot;</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><strong>For Generating Public-Facing Pages</strong></p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Rakefile </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>public_dir       = <span class="string"><span class="delimiter">&quot;</span><span class="content">public/software-developer</span><span class="delimiter">&quot;</span></span>
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span><span class="comment"># If deploying with rsync, update your Rakefile path</span>
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>document_root    = <span class="string"><span class="delimiter">&quot;</span><span class="content">~/cat-mandu.com/software-developer</span><span class="delimiter">&quot;</span></span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /><br />
+Credit: <a href="https://github.com/femmestem/">Christine Feaster</a>, <a href="https://github.com/imathis/">Brandon Mathis</a></p>
+
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Christine Feaster -
+  <span class="credit">Powered by <a href="https://github.com/femmestem/showcase">Showcase</a></span> / <a href="http://octopress.org">Octopress 2.0</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

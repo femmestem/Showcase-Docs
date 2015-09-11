@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Configuring Showcase - SHOWCASE</title>
+  <meta name="author" content="Christine Feaster">
+
+  
+  <meta name="description" content="Configuring Showcase « Previous: Setup Showcase is nearly ready to be deployed out of the box. To keep things simple, the configurations for site &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://showcaserb.org/Showcase-Docs/docs/configuring/">
+  <link href="/Showcase-Docs/favicon.png" rel="icon">
+  <link href="/Showcase-Docs/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="" rel="alternate" title="SHOWCASE" type="application/atom+xml">
+  <script src="/Showcase-Docs/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+
+  <!-- http://kenwheeler.github.io/slick/ -->
+  <script defer type="text/javascript" src="/Showcase-Docs/javascripts/libs/slick.min.js"></script>
+  
+  <script defer src="/Showcase-Docs/javascripts/application.js" type="text/javascript"></script>
+  <!--Fonts from Google Fonts directory at http://www.google.com/fonts -->
+<link href="http://fonts.googleapis.com/css?family=Oswald:regular,italic,bold,bolditalic|Open+Sans:regular,italic,bold,bolditalic|Quattrocento:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/Showcase-Docs/">SHOWCASE</a></h1>
+  
+    <h2>A portfolio+blog framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><a href="#main" class="offscreen">Skip to main content</a>
+
+<section class="nav-menu">
+  <h3 class="offscreen fa fa-navicon">MENU</h3>
+    <ul class="main-navigation">
+  <li><a href="/Showcase-Docs/docs">Documentation</a></li>
+  <li><a href="https://github.com/femmestem/Showcase">Source</a></li>
+</ul>
+
+
+  <ul class="subscription" data-subscription="rss">
+    
+    
+    
+  </ul>
+
+  
+  <form action="https://www.google.com/search" method="get">
+    <fieldset role="search">
+    <label class="fa fa-search" for="search-box"><span class="offscreen">Search</span></label>
+      <input type="hidden" name="q" value="site:showcaserb.org/Showcase-Docs" />
+      <input id="search-box" class="search" type="text" name="q" results="0" placeholder="Search title or keyword"/>
+    </fieldset>
+  </form>
+  
+
+</section>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Configuring Showcase</h1>
+    
+  </header>
+  
+  <p><a href="/Showcase-Docs/docs/setup">« Previous: Setup</a></p>
+
+<p>Showcase is nearly ready to be deployed out of the box. To keep things simple, the configurations for site content and third-party plugins are contained in a single file: <code>_config.yml</code>. Here’s a list of files for configuring Showcase:</p>
+
+<div class="highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>_config.yml         # Main config (Jekyll and third-party plugins)
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Rakefile            # Deployment config
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>config.rb           # Compass config
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>config.ru           # Rack config
+</pre></div>
+</div>
+</div>
+
+<p>Configurations in the <code>Rakefile</code> are mostly related to deployment and you probably won’t have to touch them unless you’re using rsync.</p>
+
+<h2 id="main-configuration">Main Configuration</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span><span class="comment"># ----------------------- #</span>
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span><span class="comment">#      Main Configs       #</span>
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span><span class="comment"># ----------------------- #</span>
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span><span class="key">url</span>:                <span class="comment"># For rewriting urls for RSS, etc.</span>
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span><span class="key">title</span>:              <span class="comment"># Used in the header and title tags</span>
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span><span class="key">subtitle</span>:           <span class="comment"># A short description used in the header</span>
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span><span class="key">author</span>:             <span class="comment"># Your name, for RSS, Copyright, Metadata</span>
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span><span class="key">simple_search</span>:      <span class="comment"># Search engine for simple site search</span>
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span><span class="key">description</span>:        <span class="comment"># Default meta description for your site that</span>
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>                    <span class="comment"># appears with your site link in search engine results</span>
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span><span class="key">date_format</span>:        <span class="comment"># Format dates using Ruby's date strftime syntax</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><strong>Note:</strong> If your site will have a multi-author blog, you may want to set <code>author:</code> to the name of your company or project, and add author metadata to the <a href="/Showcase-Docs/docs/blogging#anatomy-of-posts" target="_new">YAML front matter</a> configurations inside posts and pages to give proper attribution for those works.</p>
+
+<h2 id="jekyll-configuration">Jekyll Configuration</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n19" name="n19">19</a></span><span class="comment"># --------------------- #</span>
+<span class="line-numbers"><strong><a href="#n20" name="n20">20</a></strong></span><span class="comment">#    Jekyll Configs     #</span>
+<span class="line-numbers"><a href="#n21" name="n21">21</a></span><span class="comment"># --------------------- #</span>
+<span class="line-numbers"><a href="#n22" name="n22">22</a></span>
+<span class="line-numbers"><a href="#n23" name="n23">23</a></span><span class="key">root</span>:               <span class="comment"># Mapping for relative urls (default: /)</span>
+<span class="line-numbers"><a href="#n24" name="n24">24</a></span><span class="key">source</span>:             <span class="comment"># Directory for site source files</span>
+<span class="line-numbers"><a href="#n25" name="n25">25</a></span><span class="key">destination</span>:        <span class="comment"># Directory for generated site files</span>
+<span class="line-numbers"><a href="#n26" name="n26">26</a></span><span class="key">plugins</span>:            <span class="comment"># Directory for Jekyll plugins</span>
+<span class="line-numbers"><a href="#n27" name="n27">27</a></span><span class="key">code_dir</span>:           <span class="comment"># Directory for code snippets (for include_code plugin)</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>If you want to publish your site to a subdirectory, (see <a href="">Deploying Showcase to a Subdirectory</a>).</p>
+
+<h2 id="portfolio-configuration">Portfolio Configuration</h2>
+<p>Portfolio functionality is built on <a href="http://jekyllrb.com/docs/collections/">Jekyll’s Collections</a> feature. Portfolio configurations are updated for you automatically with the <code>new_portfolio</code> rake task. This section is just FYI to troubleshoot a portfolio page is not being published properly.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n38" name="n38">38</a></span><span class="comment"># ------------------------------- #</span>
+<span class="line-numbers"><a href="#n39" name="n39">39</a></span><span class="comment">#    Portfolios &amp; Collections     #</span>
+<span class="line-numbers"><strong><a href="#n40" name="n40">40</a></strong></span><span class="comment"># ------------------------------- #</span>
+<span class="line-numbers"><a href="#n41" name="n41">41</a></span>
+<span class="line-numbers"><a href="#n42" name="n42">42</a></span><span class="key">collections</span>:
+<span class="line-numbers"><a href="#n43" name="n43">43</a></span>  <span class="key">portfolio-name</span>:  <span class="comment"># Registers documents in _portfolio-name directory as a collection</span>
+<span class="line-numbers"><a href="#n44" name="n44">44</a></span>    <span class="key">output</span>:        <span class="comment"># Create public-facing web page for documents in portfolio directory </span>
+<span class="line-numbers"><a href="#n45" name="n45">45</a></span>    <span class="key">permalink</span>:     <span class="comment"># Permalink structure for portfolio and project pages</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h2 id="blog-configuration">Blog Configuration</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n62" name="n62">62</a></span><span class="comment"># ------------------- #</span>
+<span class="line-numbers"><a href="#n63" name="n63">63</a></span><span class="comment">#    Blog Configs     #</span>
+<span class="line-numbers"><a href="#n64" name="n64">64</a></span><span class="comment"># ------------------- #</span>
+<span class="line-numbers"><a href="#n65" name="n65">65</a></span>
+<span class="line-numbers"><a href="#n66" name="n66">66</a></span><span class="key">subscribe_rss</span>:      <span class="comment"># URL for your site's feed, defauts to /blog/atom.xml</span>
+<span class="line-numbers"><a href="#n67" name="n67">67</a></span><span class="key">subscribe_email</span>:    <span class="comment"># URL to subscribe by email (service required)</span>
+<span class="line-numbers"><a href="#n68" name="n68">68</a></span><span class="key">email</span>:              <span class="comment"># Optional email address for the RSS feed</span>
+<span class="line-numbers"><a href="#n69" name="n69">69</a></span><span class="key">category_feeds</span>:     <span class="comment"># Enable per category RSS feeds (defaults to false)</span>
+<span class="line-numbers"><strong><a href="#n70" name="n70">70</a></strong></span>
+<span class="line-numbers"><a href="#n71" name="n71">71</a></span><span class="key">permalink</span>:         <span class="comment"># Permalink structure for blog posts</span>
+<span class="line-numbers"><a href="#n72" name="n72">72</a></span><span class="key">paginate</span>:          <span class="comment"># Posts per page on the blog index</span>
+<span class="line-numbers"><a href="#n73" name="n73">73</a></span><span class="key">paginate_path</span>:     <span class="comment"># Directory base for pagination URLs eg. /blog/page/2/</span>
+<span class="line-numbers"><a href="#n74" name="n74">74</a></span><span class="key">recent_posts</span>:      <span class="comment"># Number of recent blog posts to appear in the sidebar</span>
+<span class="line-numbers"><a href="#n75" name="n75">75</a></span><span class="key">category_dir</span>:      <span class="comment"># Directory for generated blog category pages</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h2 id="sidebar-modules">Sidebar Modules</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n81" name="n81">81</a></span><span class="comment"># ---------------------- #</span>
+<span class="line-numbers"><a href="#n82" name="n82">82</a></span><span class="comment">#    Sidebar Modules     #</span>
+<span class="line-numbers"><a href="#n83" name="n83">83</a></span><span class="comment"># ---------------------- #</span>
+<span class="line-numbers"><a href="#n84" name="n84">84</a></span>
+<span class="line-numbers"><a href="#n85" name="n85">85</a></span><span class="key">default_asides</span>:    <span class="comment"># Configure what shows up in the sidebar and in what order</span>
+<span class="line-numbers"><a href="#n86" name="n86">86</a></span><span class="key">blog_index_asides</span>: <span class="comment"># Optional sidebar config for blog index page</span>
+<span class="line-numbers"><a href="#n87" name="n87">87</a></span><span class="key">post_asides</span>:       <span class="comment"># Optional sidebar config for post layout</span>
+<span class="line-numbers"><a href="#n88" name="n88">88</a></span><span class="key">page_asides</span>:       <span class="comment"># Optional sidebar config for page layout</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<h2 id="plugin-settings">Plugin Settings</h2>
+
+<p>These third party integrations are already set up for you. Simply fill in the configurations and they’ll be added to your site.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>_config.yml </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n95" name="n95">95</a></span><span class="comment"># ----------------------- #</span>
+<span class="line-numbers"> <a href="#n96" name="n96">96</a></span><span class="comment">#   3rd Party Settings    #</span>
+<span class="line-numbers"> <a href="#n97" name="n97">97</a></span><span class="comment"># ----------------------- #</span>
+<span class="line-numbers"> <a href="#n98" name="n98">98</a></span>
+<span class="line-numbers"> <a href="#n99" name="n99">99</a></span><span class="constant">Github</span>             <span class="comment"># List your github repositories in the sidebar</span>
+<span class="line-numbers"><strong><a href="#n100" name="n100">100</a></strong></span><span class="constant">Twitter</span>            <span class="comment"># Add a button for sharing posts and pages on Twitter</span>
+<span class="line-numbers"><a href="#n101" name="n101">101</a></span><span class="constant">Google</span> <span class="constant">Plus</span> <span class="constant">One</span>    <span class="comment"># Setup sharing for posts and pages on Google's Plus One network.</span>
+<span class="line-numbers"><a href="#n102" name="n102">102</a></span><span class="constant">Pinboard</span>           <span class="comment"># Share your recent Pinboard bookmarks in the sidebar.</span>
+<span class="line-numbers"><a href="#n103" name="n103">103</a></span><span class="constant">Delicious</span>          <span class="comment"># Share your recent Delicious bookmarks in the sidebar.</span>
+<span class="line-numbers"><a href="#n104" name="n104">104</a></span><span class="constant">Disqus</span> <span class="constant">Comments</span>    <span class="comment"># Add your Disqus short name to enable Disqus comments on your site.</span>
+<span class="line-numbers"><a href="#n105" name="n105">105</a></span><span class="constant">Google</span> <span class="constant">Analytics</span>   <span class="comment"># Add your tracking ID to enable Google Analytics tracking for your site.</span>
+<span class="line-numbers"><a href="#n106" name="n106">106</a></span><span class="constant">Facebook</span>           <span class="comment"># Add a Facebook 'Like' button</span></pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><br /><br />
+Credit: <a href="https://github.com/femmestem/">Christine Feaster</a>, <a href="https://github.com/imathis/">Brandon Mathis</a></p>
+
+<h2 id="next-steps">Next Steps</h2>
+<p><a href="/Showcase-Docs/docs/portfolios-and-projects">Creating &amp; Managing Portfolios</a><br />
+<a href="/Showcase-Docs/docs/blogging/">Blogging Basics</a><br />
+<a href="/Showcase-Docs/docs/deploying/">Deploying</a></p>
+
+
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Christine Feaster -
+  <span class="credit">Powered by <a href="https://github.com/femmestem/showcase">Showcase</a></span> / <a href="http://octopress.org">Octopress 2.0</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[SHOWCASE]]></title>
+  <link href="http://showcaserb.org/Showcase-Docs/atom.xml" rel="self"/>
+  <link href="http://showcaserb.org/Showcase-Docs/"/>
+  <updated>2015-09-11T13:14:44-07:00</updated>
+  <id>http://showcaserb.org/Showcase-Docs/</id>
+  <author>
+    <name><![CDATA[Christine Feaster]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>
